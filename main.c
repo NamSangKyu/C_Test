@@ -18,6 +18,21 @@ void print_menu(){
     printf("5. 종료\n");
 }
 
+//연락처 입력할 함수 선언
+void input_contact(){
+    //더이상 입력할수 없으면 함수 강제 종료
+    if(contact_index >= 100){
+        printf("연락처가 너무 많습니다.\n");
+        return;
+    }
+    printf("이름을 입력하세요 : ");
+    scanf("%s", contact_list[contact_index].name);
+    printf("전화번호를 입력하세요 : ");
+    scanf("%s", contact_list[contact_index].phone);
+    contact_index++;
+}
+
+
 
 // Function: main
 // Description: Main function
