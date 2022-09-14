@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <string.h>
 //연락처 구조체 생성, 전화번호, 이름 가지고 있음
 struct contact {
     char name[20];
@@ -9,6 +9,15 @@ struct contact {
 struct contact contact_list[100];
 //연락처 구조체 배열 인덱스 선언
 int contact_index = 0;
+//메뉴번호 제어할 열거형 선언
+enum menu {
+    ADD_CONTACT = 1,
+    SEARCH_CONTACT,
+    DELETE_CONTACT,
+    UPDATE_CONTACT,
+    EXIT
+};
+
 //메뉴 출력할 함수 선언
 void print_menu(){
     printf("1. 연락처 입력\n");
@@ -31,8 +40,58 @@ void input_contact(){
     scanf("%s", contact_list[contact_index].phone);
     contact_index++;
 }
-
-
+//이름으로 연락처 찾는 함수 선언
+void search_contact(){
+    char name[20];
+    printf("이름을 입력하세요 : ");
+    scanf("%s", name);
+    int i;
+    for(i = 0; i < contact_index; i++){
+        if(strcmp(name, contact_list[i].name) == 0){
+            printf("이름 : %s\n", contact_list[i].name);
+            printf("전화번호 : %s\n", contact_list[i].phone);
+            break;
+        }
+    }
+    //찾는 이름이 없으면 없다고 출력
+    if(i == contact_index){
+        printf("찾는 이름이 없습니다.\n");
+    }
+}
+//입력한 이름에 해당하는 연락처 삭제하는 함수 선언
+void delete_contact(){
+    char name[20];
+    printf("이름을 입력하세요 : ");
+    scanf("%s", name);
+    for(int i = 0; i < contact_index; i++){
+        if(strcmp(name, contact_list[i].name) == 0){
+            for(int j = i; j < contact_index; j++){
+                contact_list[j] = contact_list[j+1];
+            }
+            contact_index--;
+            //삭제 완료메시지 출력
+            printf("삭제되었습니다.\n");
+            break;
+        }
+    }
+}
+//입력한 이름으로 연락처를 검색하여 수정하는 함수 선언
+void update_contact(){
+    char name[20];
+    printf("이름을 입력하세요 : ");
+    scanf("%s", name);
+    for(int i = 0; i < contact_index; i++){
+        if(strcmp(name, contact_list[i].name) == 0){
+            printf("이름 : ");
+            scanf("%s", contact_list[i].name);
+            printf("전화번호 : ");
+            scanf("%s", contact_list[i].phone);
+            //수정 완료메시지 출력
+            printf("수정되었습니다.\n");
+            break;
+        }
+    }
+}
 
 // Function: main
 // Description: Main function
@@ -52,6 +111,7 @@ int main()
         if(menu == 5){
             break;
         }
+        
     }
     
 
