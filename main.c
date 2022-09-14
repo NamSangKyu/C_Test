@@ -21,7 +21,7 @@ enum menu {
 //메뉴 출력할 함수 선언
 void print_menu(){
     printf("1. 연락처 입력\n");
-    printf("2. 연락처 출력\n");
+    printf("2. 연락처 검색\n");
     printf("3. 연락처 삭제\n");
     printf("4. 연락처 수정\n");
     printf("5. 종료\n");
@@ -111,7 +111,21 @@ int main()
         if(menu == 5){
             break;
         }
-        
+        //입력 받은 숫자에 따라 함수 호출
+        switch(menu){
+            case ADD_CONTACT:
+                input_contact();
+                break;
+            case SEARCH_CONTACT:
+                search_contact();
+                break;
+            case DELETE_CONTACT:
+                delete_contact();
+                break;
+            case UPDATE_CONTACT:
+                update_contact();
+                break; 
+        }       
     }
     
 
